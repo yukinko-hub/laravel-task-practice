@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Folder;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateFolder; // 追加
-// ★ Authクラスをインポートする
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;// 追加
 
 class FolderController extends Controller
 {
@@ -30,7 +29,7 @@ class FolderController extends Controller
       //$folder->save();
 
       return redirect()->route('tasks.index',[
-          'id' => $folder->id,
+          'folder' => $folder->id,
       ]);
 
     }
