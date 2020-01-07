@@ -91,6 +91,12 @@ return [
             'prefix_indexes' => true,
         ],
 
+        // ★ テスト用にこの設定を追加
+        'sqlite_testing' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ],
     ],
 
     /*
