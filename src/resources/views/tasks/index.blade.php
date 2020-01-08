@@ -56,6 +56,7 @@
                   </td>
                   <td>{{ $task->formatted_due_date }}</td>
                   <td><a href="{{ route('tasks.edit', ['folder' => $task->folder_id, 'task' => $task->id]) }}">編集</a></td>
+                  <td><a href="{{ route('tasks.move', ['folder' => $task->folder_id, 'task' => $task->id]) }}">移動</a></td>
                   <td><a href="{{ route('tasks.delete', ['folder' => $task->folder_id, 'task' => $task->id]) }}">削除</a></td>
                 </tr>
                 @endforeach

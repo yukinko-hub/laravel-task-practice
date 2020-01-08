@@ -9,7 +9,6 @@ use App\Http\Requests\EditTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class TaskController extends Controller
 {
     /**
@@ -135,6 +134,53 @@ class TaskController extends Controller
       ]);
     }
 
+    /**
+     * タスク移動フォーム
+     * @param Folder $folder
+     * @param Task $task
+     * @return \Illuminate\View\View
+     */
+    public function showMoveForm(Folder $folder, Task $task)
+    {
+      $this->checkRelation($folder, $task);
+
+      // ユーザーのフォルダを取得する
+      $folders = Auth::user()->folders()->get();
+
+      // 一つもフォルダを作っていなければタスク一覧画面へリダイレクト
+      if (count($folders) <=1 ) {
+        return redirect()->route('tasks.index', [
+            'folder' => $task->folder_id,
+        ]);
+      }
+
+      return view('tasks/move',[
+          'folder' => $folder,
+          'task' => $task,
+          'folders' => $folders,
+      ]);
+    }
+
+    /**
+     * タスク移動
+     * @param Folder $folder
+     * @param Task $task
+     * @param Folder $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function exemove(Folder $folder, Task $task, Request $request)
+    {
+      $this->checkRelation($folder, $task);
+
+      // 移動対象のタスクデータに入力値を詰めて save
+      $task->folder_id = $request->input('folder');
+      $task->save();
+
+      // 移動対象のタスクが属するタスク一覧画面へリダイレクト
+      return redirect()->route('tasks.index', [
+          'folder' => $task->folder_id,
+      ]);
+    }
 
 
     private function checkRelation(Folder $folder, Task $task)

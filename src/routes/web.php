@@ -34,6 +34,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/folders/{folder}/tasks/{task}/delete','TaskController@showDeleteForm')->name('tasks.delete');
     Route::post('/folders/{folder}/tasks/{task}/delete','TaskController@remove')->name('tasks.remove');
+
+    Route::get('/folders/{folder}/tasks/{task}/move','TaskController@showMoveForm')->name('tasks.move');
+    Route::post('/folders/{folder}/tasks/{task}/move','TaskController@exemove')->name('tasks.exemove');
   });
 });
 
