@@ -101,6 +101,42 @@ class TaskController extends Controller
       ]);
     }
 
+    /**
+     * タスク削除フォーム
+     * @param Folder $folder
+     * @param Task $task
+     * @return \Illuminate\View\View
+     */
+    public function showDeleteForm(Folder $folder, Task $task)
+    {
+      $this->checkRelation($folder, $task);
+
+      return view('tasks/delete',[
+          'task' => $task,
+      ]);
+    }
+
+    /**
+     * タスク削除
+     * @param Folder $folder
+     * @param Task $task
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(Folder $folder, Task $task)
+    {
+      $this->checkRelation($folder, $task);
+
+      // 削除対象のタスクを削除
+      $task->delete();
+
+      // 削除対象のタスクが属するタスク一覧画面へリダイレクト
+      return redirect()->route('tasks.index', [
+          'folder' => $folder->id,
+      ]);
+    }
+
+
+
     private function checkRelation(Folder $folder, Task $task)
     {
         if ($folder->id !== $task->folder_id) {

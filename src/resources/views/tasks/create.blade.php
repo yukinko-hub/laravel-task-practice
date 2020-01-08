@@ -30,6 +30,7 @@
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-primary">送信</button>
+                <a href="{{ route('tasks.index',['folder' => $folder_id]) }}" class="btn btn-secondary">一覧へ戻る</a>
               </div>
             </form>
           </div>

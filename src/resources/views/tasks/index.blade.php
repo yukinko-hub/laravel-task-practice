@@ -10,6 +10,13 @@
               <a href="{{ route('folders.create') }}" class="btn btn-default btn-block">
                 フォルダを追加する
               </a>
+              <p></p>
+              <a href="{{ route('folders.edit',['folder' => $current_folder_id]) }}" class="btn btn-default card-link">
+                編集
+              </a>
+              <a href="{{ route('folders.delete',['folder' => $current_folder_id]) }}" class="btn btn-default card-link">
+                削除
+              </a>
             </div>
             <div class="list-group">
               @foreach($folders as $folder)
@@ -49,6 +56,7 @@
                   </td>
                   <td>{{ $task->formatted_due_date }}</td>
                   <td><a href="{{ route('tasks.edit', ['folder' => $task->folder_id, 'task' => $task->id]) }}">編集</a></td>
+                  <td><a href="{{ route('tasks.delete', ['folder' => $task->folder_id, 'task' => $task->id]) }}">削除</a></td>
                 </tr>
                 @endforeach
               </tbody>
