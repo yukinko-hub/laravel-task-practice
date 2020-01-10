@@ -19,7 +19,7 @@
               </div>
             @endif
             
-            <form action="{{ route('tasks.exemove', ['folder' => $folder->id,'task' => $task->id]) }}" method="POST">
+            <form action="{{ route('tasks.exemove', ['folder' => $task->folder_id,'task' => $task->id]) }}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="title">タイトル</label>
@@ -49,6 +49,7 @@
               <p></p>
               <div class="text-right">
                 <button type="submit" class="btn btn-primary">送信</button>
+                <a href="{{ route('tasks.index',['folder' => $task->folder_id]) }}" class="btn btn-secondary">一覧へ戻る</a>
               </div>
             </form>
           </div>
